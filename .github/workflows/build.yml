@@ -15,3 +15,10 @@ jobs:
 
       - name: Build Docker Image
         run: docker build -t flask-demo .
+
+      - name: Run Trivy Scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: flask-demo
+          format: table
+          exit-code: 0
