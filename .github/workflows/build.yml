@@ -9,7 +9,7 @@ jobs:
 security-and-build:
 runs-on: ubuntu-latest
 
-
+```
 steps:
   - name: Checkout Code
     uses: actions/checkout@v4
@@ -29,3 +29,5 @@ steps:
       image-ref: flask-demo
       format: table
       exit-code: 0
+```
+
