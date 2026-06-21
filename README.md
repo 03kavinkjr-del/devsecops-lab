@@ -1,21 +1,26 @@
-	# DevSecOps Lab 🚀
+# DevSecOps Lab 🚀
 
 ## Overview
 
-This project demonstrates a complete DevSecOps CI pipeline that integrates security checks throughout the software development lifecycle.
+This repository demonstrates a hands-on DevSecOps learning project that integrates security throughout the software development lifecycle.
 
-The pipeline automatically performs:
+The project covers:
 
-* Secret Detection (GitLeaks)
-* Static Application Security Testing (Semgrep)
-* Docker Image Build
-* Container Vulnerability Scanning (Trivy)
-
-The project also includes Infrastructure as Code (IaC) security practices using Terraform and Checkov.
+* Linux & Git fundamentals
+* Docker containerization
+* CI/CD with GitHub Actions
+* Secret detection with GitLeaks
+* Static Application Security Testing (SAST) with Semgrep
+* Container vulnerability scanning with Trivy
+* Infrastructure as Code (IaC) with Terraform
+* IaC security scanning with Checkov
+* Dynamic Application Security Testing (DAST) with OWASP ZAP
+* Jenkins fundamentals
+* Kubernetes deployment and self-healing
 
 ---
 
-## Architecture
+## DevSecOps Pipeline
 
 ```text
 Developer
@@ -27,28 +32,63 @@ GitHub Repository
 GitHub Actions
     │
     ├── GitLeaks
-    │      └── Detects secrets and credentials
+    │      └── Secret Detection
     │
     ├── Semgrep
-    │      └── Performs SAST analysis
+    │      └── SAST Analysis
     │
     ├── Docker Build
-    │      └── Builds application container
     │
     └── Trivy
-           └── Scans container vulnerabilities
+           └── Container Security Scan
 ```
 
 ---
 
-## Security Controls
+## Project Structure
+
+```text
+devsecops-lab/
+│
+├── app.py
+├── Dockerfile
+├── requirements.txt
+├── deployment.yaml
+├── README.md
+│
+└── .github/
+    └── workflows/
+        └── build.yml
+```
+
+---
+
+## Technologies Used
+
+| Category                | Tool                    |
+| ----------------------- | ----------------------- |
+| OS                      | Ubuntu WSL              |
+| Version Control         | Git & GitHub            |
+| CI/CD                   | GitHub Actions, Jenkins |
+| Containers              | Docker                  |
+| Container Security      | Trivy                   |
+| IaC                     | Terraform               |
+| IaC Security            | Checkov                 |
+| Secret Detection        | GitLeaks                |
+| SAST                    | Semgrep                 |
+| DAST                    | OWASP ZAP               |
+| Container Orchestration | Kubernetes              |
+| Language                | Python                  |
+
+---
+
+## Security Tools Demonstrated
 
 ### GitLeaks
 
 Detects:
 
 * API Keys
-* AWS Credentials
 * Passwords
 * Tokens
 * Hardcoded Secrets
@@ -58,121 +98,79 @@ Detects:
 Detects:
 
 * Command Injection
-* Insecure Functions
-* Unsafe Coding Patterns
+* Insecure Coding Patterns
 * Security Misconfigurations
 
 ### Trivy
 
 Detects:
 
-* Container Vulnerabilities
+* Vulnerable Packages
 * CVEs
-* Misconfigurations
-* Outdated Packages
+* Container Misconfigurations
 
 ### Checkov
 
 Detects:
 
-* Open Security Groups
-* Missing Resource Descriptions
 * Infrastructure Misconfigurations
-* IaC Security Issues
+* Insecure Security Groups
+* Terraform Security Issues
+
+### OWASP ZAP
+
+Detects:
+
+* Missing Security Headers
+* Information Disclosure
+* Web Application Security Issues
 
 ---
 
-## Technologies Used
+## Kubernetes Concepts Demonstrated
 
-| Category           | Tool               |
-| ------------------ | ------------------ |
-| Operating System   | Linux (Ubuntu WSL) |
-| Version Control    | Git & GitHub       |
-| CI/CD              | GitHub Actions     |
-| Containerization   | Docker             |
-| Container Security | Trivy              |
-| IaC                | Terraform          |
-| IaC Security       | Checkov            |
-| Secret Detection   | GitLeaks           |
-| SAST               | Semgrep            |
-| Language           | Python             |
+* Pods
+* Deployments
+* Replicas
+* Scaling
+* Self-Healing
 
----
+Example:
 
-## Pipeline Workflow
-
-```text
-Git Push
-   │
-   ▼
-GitLeaks Scan
-   │
-   ▼
-Semgrep Scan
-   │
-   ▼
-Docker Build
-   │
-   ▼
-Trivy Scan
-   │
-   ▼
-Pipeline Success
+```bash
+kubectl scale deployment flask-app --replicas=3
 ```
+
+```bash
+kubectl delete pod <pod-name>
+```
+
+Kubernetes automatically recreates deleted pods to maintain the desired state.
 
 ---
 
 ## Key Learnings
 
-* Linux Fundamentals
-* Git & GitHub Workflows
+* Linux Administration
+* Git Workflows
 * SSH Authentication
-* Docker Containerization
-* GitHub Actions CI/CD
+* Containerization
+* CI/CD Automation
 * Shift-Left Security
-* Terraform Basics
-* Infrastructure as Code Security
-* Secret Detection
-* Static Application Security Testing
-* Container Security
+* Infrastructure as Code
+* SAST, DAST, and Container Security
+* Kubernetes Fundamentals
 
 ---
 
-## Security Findings Demonstrated
+## Future Enhancements
 
-### Semgrep
-
-Detected command injection vulnerability:
-
-```python
-subprocess.Popen(cmd, shell=True)
-```
-
-### GitLeaks
-
-Detected hardcoded AWS-style credentials in Git history.
-
-### Checkov
-
-Detected:
-
-* Open SSH access (0.0.0.0/0)
-* Missing resource descriptions
-* Security group configuration issues
-
-### Trivy
-
-Detected vulnerable packages inside Docker images.
-
----
-
-## Future Improvements
-
-* Jenkins Integration
-* Kubernetes Deployment
 * AWS Deployment
+* Helm Charts
+* ArgoCD
+* Kubernetes Security Hardening
+* EKS Integration
 * Security Hub Integration
-* Automated Deployment Pipeline
 
 ---
 
@@ -180,5 +178,7 @@ Detected vulnerable packages inside Docker images.
 
 **Kavin**
 
-M.Sc Cyber Security Student | DevSecOps Enthusiast
+M.Sc. Cyber Security Student
+
+DevSecOps | Cloud Security | Security Automation
 
