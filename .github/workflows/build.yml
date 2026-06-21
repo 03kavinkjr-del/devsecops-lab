@@ -1,13 +1,12 @@
-name: Build Pipeline
+name: DevSecOps Pipeline
 
-# Trigger workflow on pushes to main branch
 on:
   push:
     branches:
       - main
 
 jobs:
-  docker-build:
+  security-and-build:
     runs-on: ubuntu-latest
 
     steps:
@@ -15,7 +14,15 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      # Build Docker image from Dockerfile
+      # Scan repository for secrets
+      - name: Run GitLeaks
+        uses: gitleaks/gitleaks-action@v2
+
+      # Static Application Security Testing
+      - name: Run Semgrep
+        uses: semgrep/semgrep-action@v1
+
+      # Build Docker image
       - name: Build Docker Image
         run: docker build -t flask-demo .
 
