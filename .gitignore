@@ -1,0 +1,27 @@
+# Python
+
+**pycache**/
+*.pyc
+
+# Virtual Environments
+
+venv/
+checkov-env/
+semgrep-env/
+
+# Terraform
+
+.terraform/
+*.tfstate
+*.tfstate.*
+
+# Secrets
+
+.env
+*.env
+secrets.txt
+
+# OS Files
+
+.DS_Store
+Thumbs.db
