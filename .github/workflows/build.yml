@@ -11,29 +11,23 @@ runs-on: ubuntu-latest
 
 ```
 steps:
-  # Checkout source code
   - name: Checkout Code
     uses: actions/checkout@v4
 
-  # Secret Scanning
   - name: Run GitLeaks
     uses: gitleaks/gitleaks-action@v2
 
-  # Static Application Security Testing (SAST)
   - name: Run Semgrep
     uses: semgrep/semgrep-action@v1
 
-  # Build Docker Image
   - name: Build Docker Image
     run: docker build -t flask-demo .
 
-  # Container Vulnerability Scan
   - name: Run Trivy Scan
-    uses: aquasecurity/trivy-action@v0.28.0
+    uses: aquasecurity/trivy-action@master
     with:
       image-ref: flask-demo
       format: table
-      severity: HIGH,CRITICAL
       exit-code: 0
 ```
 
