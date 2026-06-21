@@ -29,5 +29,4 @@ steps:
       image-ref: flask-demo
       format: table
       exit-code: 0
-```
 
