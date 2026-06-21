@@ -1,35 +1,39 @@
 name: DevSecOps Pipeline
 
 on:
-  push:
-    branches:
-      - main
+push:
+branches:
+- main
 
 jobs:
-  security-and-build:
-    runs-on: ubuntu-latest
+security-and-build:
+runs-on: ubuntu-latest
 
-    steps:
-      # Download repository source code
-      - name: Checkout Code
-        uses: actions/checkout@v4
+```
+steps:
+  # Checkout source code
+  - name: Checkout Code
+    uses: actions/checkout@v4
 
-      # Scan repository for secrets
-      - name: Run GitLeaks
-        uses: gitleaks/gitleaks-action@v2
+  # Secret Scanning
+  - name: Run GitLeaks
+    uses: gitleaks/gitleaks-action@v2
 
-      # Static Application Security Testing
-      - name: Run Semgrep
-        uses: semgrep/semgrep-action@v1
+  # Static Application Security Testing (SAST)
+  - name: Run Semgrep
+    uses: semgrep/semgrep-action@v1
 
-      # Build Docker image
-      - name: Build Docker Image
-        run: docker build -t flask-demo .
+  # Build Docker Image
+  - name: Build Docker Image
+    run: docker build -t flask-demo .
 
-      # Scan Docker image for vulnerabilities
-      - name: Run Trivy Scan
-        uses: aquasecurity/trivy-action@0.28.0
-        with:
-          image-ref: flask-demo
-          format: table
-          exit-code: 0
+  # Container Vulnerability Scan
+  - name: Run Trivy Scan
+    uses: aquasecurity/trivy-action@v0.28.0
+    with:
+      image-ref: flask-demo
+      format: table
+      severity: HIGH,CRITICAL
+      exit-code: 0
+```
+
