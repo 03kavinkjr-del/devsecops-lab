@@ -1,20 +1,13 @@
-# Use lightweight Python base image
-FROM python:3.11-slim
+FROM python:3.12-slim
 
-# Create non-root user for security
-RUN useradd -m appuser
-
-# Set working directory
 WORKDIR /app
 
-# Copy application files
+COPY requirements.txt .
+
+RUN pip install --no-cache-dir -r requirements.txt
+
 COPY . .
 
-# Install dependencies
-RUN pip install -r requirements.txt
+EXPOSE 5000
 
-# Run application as non-root user
-USER appuser
-
-# Start Flask application
-CMD ["python","app.py"]
+CMD ["python", "app.py"]
